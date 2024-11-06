@@ -13,10 +13,19 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getProducts("shoes")
-      .then((Response) => setProducts(Response))
-      .catch((e) => setError(e))
-      .finally(() => setLoading(false));
+    async function init(params) {
+      try {
+        const response = await getProducts("shoes");
+        setProducts(response);
+      }
+      catch (e) {
+        setError(e);
+      }
+      finally {
+        setLoading(false);
+      }
+    }
+    init();
   }, []); // [] means the reason to re-render, empty means run only once
 
   function renderProduct(p) {
