@@ -1,33 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Footer from "./Footer";
 import Header from "./Header";
-import { getProducts } from "./services/productService";
 import Spinner from "./Spinner"
+import useFetch from "./services/useFetch";
 
 export default function App() {
 
   const [size, setSize] = useState("");
-  const [products, setProducts] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function init(params) {
-      try {
-        const response = await getProducts("shoes");
-        setProducts(response);
-      }
-      catch (e) {
-        setError(e);
-      }
-      finally {
-        setLoading(false);
-      }
-    }
-    init();
-  }, []); // [] means the reason to re-render, empty means run only once
-
+  const { data: products, loading, error } = useFetch("products?category=shoes");
+  
   function renderProduct(p) {
     return (
       <div key={p.id} className="product">
