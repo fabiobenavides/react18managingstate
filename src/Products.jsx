@@ -8,7 +8,7 @@ import PageNotFound from "./PageNotFound";
 export default function Products() {
 
   const [size, setSize] = useState("");
-  const { category } = useParams(); //Corrects with the placeholder at App.jsx
+  const { category } = useParams(); // Corresponds with the placeholder at App.jsx
 
   const { data: products, loading, error } = useFetch("products?category=" + category);
   
