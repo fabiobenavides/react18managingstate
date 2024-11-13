@@ -4,7 +4,7 @@ import useFetch from "./services/useFetch";
 import Spinner from "./Spinner";
 import PageNotFound from "./PageNotFound";
 
-export default function Detail() {
+export default function Detail({ addToCart }) {
 
     const [sku, setSku] = useState("");
     const { id } = useParams(); //Corresponds with the placeholder at App.jsx
@@ -32,7 +32,10 @@ export default function Detail() {
         <p>
             <button className="btn bt-primary" 
                 disabled={!sku}
-                onClick={() => { navigate("/cart")}}>
+                onClick={() => { 
+                    addToCart(id, sku);
+                    navigate("/cart")
+                }}>
                 Add to cart
             </button>
         </p>
