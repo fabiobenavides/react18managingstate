@@ -41,6 +41,7 @@ export default function Cart({ cart, updateQuantity }) {
 
   if (loading) return <Spinner />;
   if (error) throw error;
+  if (cart.length === 0) return (<div>Cart Empty</div>)
 
   return (
     <section id="cart">
